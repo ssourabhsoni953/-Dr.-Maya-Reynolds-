@@ -2,9 +2,14 @@
 
 @theme {
   --font-montserrat: "Montserrat", sans-serif;
+  --font-serif: "Cormorant Infant", Georgia, serif;
+  --font-script: "PrintedMoments", cursive;
 }
 
 :root {
+  --font-serif: "Cormorant Infant", Georgia, serif;
+  --font-script: "PrintedMoments", cursive;
+
   --color-white: hsl(45, 31%, 95%);
   --color-black: hsla(0, 0%, 16.86%);
 
@@ -32,5 +37,26 @@ body {
   src: url("/Fonts/Montserrat500/static/Montserrat-Medium.ttf")
     format("truetype");
   font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cormorant Infant";
+  src: url("/Fonts/CormorantInfant/cormorant-infant-regular.woff2") format("woff2");
+  font-weight: 300 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cormorant Infant";
+  src: url("/Fonts/CormorantInfant/cormorant-infant-bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PrintedMoments";
+  src: url("/Fonts/PrintedMoments/printedmoments-webfont.woff") format("woff");
+  font-weight: 400;
   font-style: normal;
 }
