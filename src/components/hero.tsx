@@ -3,196 +3,169 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/**
- * Hero Component - Conejo Valley Family Counseling
- *
- * Implements a pixel-accurate clone of the homepage hero section:
- * - Left vertical portrait of family on beach (family-hero.webp)
- * - Center editorial layout:
- *   1. Category / Eyebrow: "ONLINE & IN-PERSON COUNSELING IN NEWBURY PARK & ACROSS CA"
- *   2. Serif Editorial H1: "Rebuild your foundation on solid ground and finally begin to thrive."
- *      with "thrive." styled in custom script font 'PrintedMoments' in sage teal (#86b2b2)
- *   3. Subtitle description with light, airy typography
- *   4. "BOOK AN APPOINTMENT" CTA with animated underline hover effect
- * - Right offset vertical image of ocean waves (ocean-hero.webp)
- * - Fully responsive: stacks content cleanly on mobile with images below CTA
- */
 export default function Hero() {
   return (
-    <section data-testid="hero-section" className="relative w-full">
-      <div className="pt-6 md:pt-10 lg:pt-12 pb-14 md:pb-20 lg:pb-24 bg-white overflow-hidden">
-        {/* ======================================================== */}
-        {/* DESKTOP / TABLET LAYOUT (>= sm breakpoint)               */}
-        {/* ======================================================== */}
-        <div className="hidden sm:grid grid-cols-[1fr_repeat(24,4rem)_1fr] grid-rows-18 gap-3 sm:h-220.75 items-start">
-          {/* LEFT COLUMN: Family Beach Portrait */}
-          <div className="relative 2xl:col-[1/6] 2xl:row-[2/18]  lg:col-[1/7] lg:row-[2/14] sm:h-full sm:col-[1/5] sm:row-[1/9]">
-            <div className="relative w-full h-full overflow-hidden">
+    <section data-testid="hero-section" className="relative w-full overflow-hidden">
+      <div className="pt-6 md:pt-10 lg:pt-14 pb-14 md:pb-20 lg:pb-24">
+        <div className="hidden sm:grid grid-cols-[minmax(0,1fr)_repeat(24,minmax(0,4rem))_minmax(0,1fr)] grid-rows-18 gap-3 sm:h-[860px] lg:h-[900px] xl:h-[920px] items-start">
+          <div className="relative 2xl:col-[1/8] 2xl:row-[2/18] lg:col-[1/8] lg:row-[2/16] sm:col-[1/7] sm:row-[1/14] sm:h-full">
+            <div className="relative w-full h-full overflow-hidden shadow-2xl rounded-3xl border border-[#82C49C]/40">
               <Image
-                src="/images/hero-Img/family-hero.webp"
-                alt="Family walking on the beach in Newbury Park, CA"
+                src="/images/reynolds/dr-maya-reynolds.jpg"
+                alt="Dr. Maya Reynolds, PsyD - Licensed Clinical Psychologist in Santa Monica"
                 fill
                 priority
-                className="object-cover object-center"
+                sizes="(max-width: 1024px) 30vw, 25vw"
+                className="object-cover object-top"
               />
-              {/* Subtle tint overlay matching live Squarespace site */}
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundColor: "hsla(36, 30.86%, 84.12%, 0.07)" }}
+                style={{ backgroundColor: "rgba(40, 75, 54, 0.15)" }}
               />
             </div>
           </div>
 
-          {/* CENTER COLUMN: Text Content */}
-          <div className="relative 2xl:col-[8/18] 2xl:row-[2/18]   lg:col-[8/16] lg:row-[2/10] sm:col-[6/11] h-full flex flex-col justify-start ">
-            {/* 1. Category Eyebrow Tag */}
+          <div className="relative 2xl:col-[9/18] 2xl:row-[2/18] lg:col-[9/18] lg:row-[2/16] sm:col-[8/17] h-full flex flex-col justify-start pt-2 lg:pt-4">
             <p
-              className="text-[13px] lg:text-[14.5px] tracking-[0.14em] text-[#2b2b2b] uppercase font-medium leading-[1.6] "
-              style={{ fontFamily: "var(--font-montserrat)" }}
+              className="text-[11px] lg:text-[12px] tracking-[0.22em] text-[#DFF7E8] uppercase font-semibold leading-[1.6]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Online &amp; In-Person Counseling In
-              <br className="hidden sm:inline" /> Newbury Park &amp; Across CA
+              DR. MAYA REYNOLDS, PsyD · LICENSED CLINICAL PSYCHOLOGIST
+              <br className="hidden sm:inline" />
+              <span className="text-[#82C49C] font-normal"> · SANTA MONICA &amp; STATEWIDE CALIFORNIA TELEHEALTH</span>
             </p>
 
-            {/* 2. Main Editorial H1 Headline */}
             <h1
-              className="mt-10 lg:mt-16 xl:mt-20 text-[2.75rem] md:text-[3.1rem] lg:text-[3.5rem] xl:text-[3.9rem] leading-[1.2] text-[#2b2b2b] tracking-[-0.01em] font-extralight "
-              style={{ fontFamily: "var(--font-serif)" }}
+              className="mt-8 lg:mt-12 xl:mt-14 text-[2.6rem] md:text-[3rem] lg:text-[3.4rem] xl:text-[3.9rem] leading-[1.12] text-white tracking-[-0.015em] font-light drop-shadow-sm"
+              style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
             >
-              Rebuild your foundation on solid ground and finally begin to{" "}
+              Feeling &ldquo;functional&rdquo; on the outside, while quietly struggling{" "}
               <span
-                className="inline-block text-[#86b2b2] text-[1.22em] font-normal lowercase not-italic align-baseline leading-[0.7]"
+                className="inline-block text-[#DFF7E8] text-[1.28em] font-normal lowercase not-italic align-baseline leading-[0.7] transform translate-y-1 drop-shadow-md"
                 style={{
-                  fontFamily: "var(--font-script)",
+                  fontFamily: "'PrintedMoments', cursive",
                 }}
               >
-                thrive
+                within
               </span>
               .
             </h1>
 
-            {/* 3. Subtitle / Paragraph */}
             <p
-              className="mt-6 md:mt-8 text-[16px] lg:text-[16.5px] leading-[1.8] text-[#3a3a3a] font-light max-w-130"
-              style={{ fontFamily: "var(--font-montserrat)" }}
+              className="mt-6 md:mt-8 text-[15px] lg:text-[16px] leading-[1.85] text-[#DFF7E8] font-light max-w-[520px]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Specialized therapy for adults, couples, teens, and children to
-              reflect, heal, and grow.
+              Therapy in Santa Monica and statewide California for thoughtful, high-achieving
+              adults overwhelmed by anxiety, stress, or the lingering effects of past experiences.
+              A space combining practical tools with depth-oriented work to slow down, reconnect,
+              and feel regulated in daily life.
             </p>
 
-            {/* 4. Book An Appointment CTA */}
-            <div className="mt-8 md:mt-10 lg:mt-12">
+            <div className="mt-8 md:mt-10 lg:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-7">
               <Link
-                href="/contact"
-                className="hero-underline-btn text-[12.5px] lg:text-[13.5px] tracking-[0.14em] uppercase text-[#2b2b2b] font-normal transition-opacity hover:opacity-80 border-b pb-2"
-                style={{ fontFamily: "var(--font-montserrat)" }}
+                href="#contact"
+                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12px] lg:text-[13px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 hover:bg-[#DFF7E8] hover:shadow-xl active:scale-95 border border-[#82C49C]/50"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                Book An Appointment
+                Schedule an Initial Consultation
+              </Link>
+              <Link
+                href="#services"
+                className="hero-underline-btn text-[12px] lg:text-[13px] tracking-[0.14em] uppercase text-[#DFF7E8] font-normal pb-1 hover:text-white transition-colors"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                Explore Areas of Focus &rarr;
               </Link>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Ocean Waves Shoreline Image */}
-          <div className="relative 2xl:col-[19/27] 2xl:row-[7/17] lg:col-[16/27] lg:row-[6/14] h-full sm:col-[11/27] sm:row-[4/9]">
-            <div className="relative w-full h-full overflow-hidden">
+          <div className="relative 2xl:col-[19/27] 2xl:row-[6/17] lg:col-[19/27] lg:row-[5/15] sm:col-[18/27] sm:row-[4/14] h-full">
+            <div className="relative w-full h-full overflow-hidden shadow-2xl rounded-3xl border border-[#82C49C]/40">
               <Image
-                src="/images/hero-Img/ocean-hero.webp"
-                alt="Gentle ocean waves rolling onto the sand"
+                src="/images/reynolds/hero-ocean-mist.jpg"
+                alt="Calming Santa Monica Pacific ocean morning mist at dawn"
                 fill
                 priority
+                sizes="(max-width: 1024px) 35vw, 30vw"
                 className="object-cover"
               />
-              {/* Subtle tint overlay */}
               <div
                 className="absolute inset-0 pointer-events-none"
-                style={{ backgroundColor: "hsla(36, 30.86%, 84.12%, 0.14)" }}
+                style={{ backgroundColor: "rgba(40, 75, 54, 0.12)" }}
               />
             </div>
           </div>
         </div>
 
-        {/* ======================================================== */}
-        {/* MOBILE LAYOUT (< sm breakpoint)                          */}
-        {/* ======================================================== */}
-        <div className="grid grid-cols-1 gap-y-6 sm:hidden pt-2 ">
-          {/* 1. Eyebrow */}
+        <div className="sm:hidden px-6 pt-2 flex flex-col space-y-6">
           <p
-            className="text-[12px] tracking-[0.14em] text-[#2b2b2b] uppercase font-medium leading-[1.6]"
-            style={{ fontFamily: "var(--font-montserrat)" }}
+            className="text-[11px] tracking-[0.2em] text-[#DFF7E8] uppercase font-semibold leading-[1.6]"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            Online &amp; In-Person Counseling In
-            <br />
-            Newbury Park &amp; Across CA
+            DR. MAYA REYNOLDS, PsyD
+            <span className="block text-[#82C49C] text-[10px] tracking-[0.16em] mt-0.5">
+              SANTA MONICA &amp; CALIFORNIA TELEHEALTH
+            </span>
           </p>
 
-          {/* 2. Headline */}
           <h1
-            className="text-[2.35rem] leading-[1.22] text-[#2b2b2b] tracking-[-0.01em] font-light"
-            style={{ fontFamily: "var(--font-serif)" }}
+            className="text-[2.35rem] leading-[1.14] text-white tracking-tight font-light"
+            style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
           >
-            Rebuild your foundation on solid ground and finally begin to{" "}
+            Feeling &ldquo;functional&rdquo; on the outside, while quietly struggling{" "}
             <span
-              className="inline-block text-[#86b2b2] text-[1.25em] font-normal lowercase not-italic align-baseline leading-[0.7]"
-              style={{
-                fontFamily: "var(--font-script)",
-              }}
+              className="inline-block text-[#DFF7E8] text-[1.25em] font-normal lowercase not-italic align-baseline leading-[0.7]"
+              style={{ fontFamily: "'PrintedMoments', cursive" }}
             >
-              thrive
+              within
             </span>
             .
           </h1>
 
-          {/* 3. Subtitle */}
+          <div className="relative w-full h-[360px] overflow-hidden rounded-2xl my-2 border border-[#82C49C]/40">
+            <Image
+              src="/images/reynolds/dr-maya-reynolds.jpg"
+              alt="Dr. Maya Reynolds, PsyD"
+              fill
+              priority
+              className="object-cover object-top"
+            />
+          </div>
+
           <p
-            className="text-[15px] leading-[1.75] text-[#3a3a3a] font-light"
-            style={{ fontFamily: "var(--font-montserrat)" }}
+            className="text-[14.5px] leading-[1.8] text-[#DFF7E8] font-light"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            Specialized therapy for adults, couples, teens, and children to
-            reflect, heal, and grow.
+            Therapy in Santa Monica and statewide California for thoughtful, high-achieving
+            adults overwhelmed by anxiety, stress, or the lingering effects of past experiences.
+            A space combining practical tools with depth-oriented work to slow down, reconnect,
+            and feel regulated in daily life.
           </p>
 
-          {/* 4. CTA Button */}
-          <div>
+          <div className="flex flex-col gap-4 pt-2">
             <Link
-              href="/contact"
-              className="hero-underline-btn text-[12.5px] tracking-[0.14em] uppercase text-[#2b2b2b] font-normal border-b pb-2"
-              style={{ fontFamily: "var(--font-montserrat)" }}
+              href="#contact"
+              className="w-full inline-flex items-center justify-center py-3.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12.5px] tracking-[0.16em] uppercase font-semibold border border-[#82C49C]/50 hover:bg-[#DFF7E8] transition-colors"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Book An Appointment
+              Schedule an Initial Consultation
+            </Link>
+            <Link
+              href="#services"
+              className="inline-flex items-center justify-center text-[12px] tracking-[0.14em] uppercase text-[#DFF7E8] py-2"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Explore Areas of Focus &rarr;
             </Link>
           </div>
 
-          {/* 5. Mobile Images Collage using Grid */}
-          <div className="grid grid-cols-12 grid-rows-10 gap-x-1 h-150  mt-4">
-            {/* Primary Family Beach photo */}
-            <div className="col-[1/7] row-[1/8]  relative  overflow-hidden shadow-sm">
-              <Image
-                src="/images/hero-Img/family-hero.webp"
-                alt="Family walking on the beach"
-                fill
-                sizes="75vw"
-                className="object-cover object-center"
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundColor: "hsla(36, 30.86%, 84.12%, 0.07)" }}
-              />
-            </div>
-
-            {/* Overlapping secondary ocean waves photo */}
-            <div className="  col-[9/13] row-[4/8] -mt-10 z-1 relative  overflow-hidden shadow-md">
-              <Image
-                src="/images/hero-Img/ocean-hero.webp"
-                alt="Ocean waves shoreline"
-                fill
-                sizes="50vw"
-                className="object-cover object-center"
-              />
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ backgroundColor: "hsla(36, 30.86%, 84.12%, 0.14)" }}
-              />
-            </div>
+          <div className="relative w-full h-[220px] overflow-hidden rounded-2xl mt-4 border border-[#82C49C]/40">
+            <Image
+              src="/images/reynolds/hero-ocean-mist.jpg"
+              alt="Calming Santa Monica Pacific ocean morning mist"
+              fill
+              className="object-cover"
+            />
           </div>
         </div>
       </div>

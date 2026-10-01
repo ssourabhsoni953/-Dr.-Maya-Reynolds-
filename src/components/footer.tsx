@@ -1,163 +1,146 @@
 import Link from "next/link";
-import Image from "next/image";
-
-const navLinks = [
-  { name: "Home", href: "/home" },
-  { name: "About", href: "/therapists-newbury-park" },
-  { name: "FAQs", href: "/faqs" },
-  { name: "Contact", href: "/contact" },
-];
-
-const teamLinks = [
-  { name: "Jennifer Anderson", href: "/jennifer-anderson" },
-  { name: "Heather Williams-Baumgart", href: "/heather-williams-baumgart" },
-  { name: "Autumn Bodily", href: "/autumn-bodily" },
-  { name: "Candace Bletscher", href: "/candace-bletscher" },
-  { name: "Samantha Johnson", href: "/samantha-johnson" },
-  { name: "Rosa Gomez", href: "/rosa-gomez" },
-  { name: "Chad Flores", href: "/chad-flores" },
-];
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#ffffff] text-[#2b2b2b]">
-      {/* Main Footer Section */}
-      <div className="max-w-[1905px] mx-auto px-6 md:px-[4vw] pt-[86px] pb-[86px]">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-10 md:gap-y-0 md:gap-x-6 items-start">
-          {/* Logo & Blurb (cols 1-4) */}
-          <div className="md:col-span-4 lg:col-span-4 flex flex-col items-start pr-0 md:pr-6">
-            <Link
-              href="/home"
-              className="mb-4 inline-block transition-opacity hover:opacity-85 max-w-[483px]"
-            >
-              <Image
-                src="/images/logo.png"
-                alt="Conejo Valley Family Counseling"
-                width={483}
-                height={193}
-                className="w-full max-w-[483px] max-h-[193px] h-auto object-contain object-left"
-                priority
-              />
+    <footer className="bg-[#1A3323] border-[#82C49C]/30 border-t w-full text-[#DFF7E8]">
+      <div className="mx-auto px-6 sm:px-10 lg:px-14 pt-16 sm:pt-20 pb-16 max-w-[1720px]">
+        <div className="items-start gap-10 lg:gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12">
+          <div className="flex flex-col items-start lg:col-span-4 pr-0 lg:pr-8">
+            <Link href="/" className="group inline-block mb-4">
+              <span
+                className="block font-normal text-[20px] text-white md:text-[23px] group-hover:text-[#DFF7E8] uppercase tracking-[0.16em] transition-colors"
+                style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
+              >
+                Dr. Maya Reynolds, PsyD
+              </span>
+              <span
+                className="block mt-1 font-medium text-[#82C49C] text-[10px] uppercase tracking-[0.24em]"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                Licensed Clinical Psychologist · Santa Monica, CA
+              </span>
             </Link>
-            <p className="text-[15px] leading-[2em] font-montserrat font-light text-[#3f3f3f] max-w-110">
-              We want to make getting started simple. You’re welcome to come
-              into our office in Newbury Park or schedule virtual appointments
-              from anywhere in CA—whatever works best for you.
+            <p
+              className="mt-2 max-w-sm font-light text-[#DFF7E8]/80 text-[14px] leading-[1.85]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Warm, collaborative, and grounded psychological care combining
+              practical tools with depth-oriented work to help you develop
+              insight, resilience, and a stronger relationship with yourself
+              over time.
             </p>
           </div>
 
-          {/* Navigate Column (cols 5-6) */}
-          <div className="md:col-span-2 lg:col-span-2">
-            <h4 className="text-[15px] font-montserrat uppercase tracking-[0.14em] font-normal text-[#2b2b2b] mb-6">
-              NAVIGATE
+          <div className="lg:col-span-3">
+            <h4
+              className="mb-4 font-semibold text-[12px] text-white uppercase tracking-[0.2em]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Santa Monica Office
             </h4>
-            <ul className="text-[14px] font-montserrat font-extralight leading-[2em] text-[#3f3f3f]">
-              {navLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-[#3f3f3f] no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Our Team Column (cols 7-9) */}
-          <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-montserrat uppercase tracking-[0.14em] font-normal text-[#2b2b2b] mb-6">
-              OUR TEAM
-            </h4>
-            <ul className="text-[14px] font-montserrat font-extralight leading-[2em] text-[#3f3f3f]">
-              {teamLinks.map((member) => (
-                <li key={member.name}>
-                  <Link
-                    href={member.href}
-                    className="text-[#3f3f3f] no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
-                  >
-                    {member.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column (cols 10-12) */}
-          <div className="md:col-span-3 lg:col-span-3">
-            <h4 className="text-[15px] font-montserrat uppercase tracking-[0.14em] font-normal text-[#2b2b2b] mb-6">
-              CONTACT
-            </h4>
-            <div className="text-[14px] font-montserrat font-extralight leading-[2em] text-[#3f3f3f]">
+            <div
+              className="space-y-2 font-light text-[#DFF7E8]/80 text-[13.5px] leading-[1.85]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
               <p>
-                925 Broadbeck Dr
+                123th Street 45 W
                 <br />
-                Suites 200 and 225
-                <br />
-                Newbury Park, CA 91320
+                Santa Monica, CA 90401
               </p>
-              <p className="mt-1">
+              <p className="pt-2 text-[#DFF7E8] text-[13px]">
+                A quiet, private space designed to feel calm and grounding, with
+                natural light and an uncluttered environment.
+              </p>
+              <p className="font-medium text-[#82C49C] text-[13px]">
+                Secure Telehealth Sessions Statewide Across California.
+              </p>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            <h4
+              className="mb-4 font-semibold text-[12px] text-white uppercase tracking-[0.2em]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Contact &amp; Hours
+            </h4>
+            <div
+              className="space-y-3 font-light text-[#DFF7E8]/80 text-[13.5px] leading-[1.85]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              <p>
                 <a
-                  href="mailto:info@conejovalleycounseling.com"
-                  className="text-[#3f3f3f] no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
+                  href="tel:3105550192"
+                  className="font-medium text-white hover:text-white transition-colors"
                 >
-                  info@conejovalleycounseling.com
+                  (310) 555-0192
                 </a>
                 <br />
                 <a
-                  href="tel:8052423120"
-                  className="text-[#3f3f3f] no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
+                  href="mailto:appointments@drmayareynolds.com"
+                  className="hover:text-white break-all transition-colors"
                 >
-                  805.242.3120
+                  appointments@drmayareynolds.com
                 </a>
               </p>
-              <p className="mt-4 text-[14px] leading-[2em] text-[#3f3f3f]">
-                Serving Thousand Oaks,
-                <br />
-                Westlake Village, Camarillo,
-                <br />
-                Moorpark, &amp; Simi Valley
+              <div>
+                <p className="font-semibold text-[11.5px] text-white uppercase tracking-[0.12em]">
+                  Clinical Hours
+                </p>
+                <p className="text-[#DFF7E8]/80 text-[12.5px]">
+                  Mon – Thu: 8:30 AM – 6:00 PM
+                  <br />
+                  <span className="text-[#82C49C] italic">
+                    By Appointment Only
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-3">
+            <h4
+              className="mb-4 font-semibold text-[12px] text-white uppercase tracking-[0.2em]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Emergency &amp; Crisis Support
+            </h4>
+            <div
+              className="bg-[#23422F] p-4 border border-[#82C49C]/40 rounded-2xl text-[#DFF7E8] text-[12.5px] leading-[1.75]"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              <p className="mb-1 font-semibold text-white">
+                Immediate Crisis Lifeline
+              </p>
+              <p>
+                If you are experiencing an immediate mental health crisis, call
+                or text <strong className="font-bold text-white">988</strong>{" "}
+                (Suicide &amp; Crisis Lifeline) or proceed to the nearest
+                emergency room.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Legal Bar (59px height green strip matching live site) */}
-      <div className="w-full bg-[#86b2b2] text-white h-10 px-6 md:px-[4vw] flex items-center">
-        <div className="w-full max-w-375 mx-auto px-10 flex items-center justify-start text-[13px] font-montserrat font-light tracking-wide text-white">
-          <div className="flex flex-wrap items-center gap-1.5 text-white">
+      <div className="bg-[#14291C] px-6 sm:px-10 lg:px-14 py-4 border-[#82C49C]/25 border-t w-full text-[#DFF7E8]">
+        <div className="flex md:flex-row flex-col justify-between items-center gap-3 mx-auto max-w-[1720px] font-light text-[#DFF7E8]/70 text-[12px] tracking-wide">
+          <p>© 2026 Dr. Maya Reynolds, PsyD. All Rights Reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[#DFF7E8]/70 text-[11.5px]">
             <Link
-              href="/terms"
-              className="hover:underline transition-opacity no-underline text-white"
-            >
-              Terms
-            </Link>
-            <span>|</span>
-            <Link
-              href="/privacy-policy"
-              className="hover:underline transition-opacity no-underline text-white"
+              href="#privacy"
+              className="hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
-            <span>|</span>
-            <Link
-              href="/disclaimer"
-              className="hover:underline transition-opacity no-underline text-white"
-            >
-              Disclaimer
+            <span>·</span>
+            <Link href="#hipaa" className="hover:text-white transition-colors">
+              Notice of Privacy Practices (HIPAA)
             </Link>
-            <span>|</span>
-            <span>Website by</span>
-            <a
-              href="https://walkerstrategyco.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:underline"
-            >
-              Walker Strategy Co.
-            </a>
+            <span>·</span>
+            <Link href="#gfe" className="hover:text-white transition-colors">
+              Good Faith Estimate
+            </Link>
           </div>
         </div>
       </div>

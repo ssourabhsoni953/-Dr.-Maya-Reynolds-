@@ -1,43 +1,60 @@
 @import "tailwindcss";
 
 @theme {
-  --font-montserrat: "Montserrat", sans-serif;
+  --color-forest: #284B36;
+  --color-eucalyptus: #4F7D56;
+  --color-sage: #82C49C;
+  --color-mint: #DFF7E8;
+  --color-alabaster: #FCFFFD;
+
+  --color-canvas: #284B36;
+  --color-surface: #4F7D56;
+  --color-stone: #4F7D56;
+  --color-slate-headline: #FCFFFD;
+  --color-granite-body: #DFF7E8;
+  --color-terracotta: #82C49C;
+  --color-seaglass: #DFF7E8;
+
   --font-serif: "Cormorant Infant", Georgia, serif;
   --font-script: "PrintedMoments", cursive;
+  --font-sans: "Montserrat", sans-serif;
+  --font-body: "Montserrat", sans-serif;
 }
 
 :root {
+  --color-forest: #284B36;
+  --color-eucalyptus: #4F7D56;
+  --color-sage: #82C49C;
+  --color-mint: #DFF7E8;
+  --color-alabaster: #FCFFFD;
+
+  --color-canvas: #284B36;
+  --color-surface: #4F7D56;
+  --color-stone: #4F7D56;
+  --color-slate-headline: #FCFFFD;
+  --color-granite-body: #DFF7E8;
+  --color-terracotta: #82C49C;
+  --color-seaglass: #DFF7E8;
+
   --font-serif: "Cormorant Infant", Georgia, serif;
   --font-script: "PrintedMoments", cursive;
+  --font-sans: "Montserrat", sans-serif;
+  --font-body: "Montserrat", sans-serif;
 
-  --color-white: hsl(45, 31%, 95%);
-  --color-black: hsla(0, 0%, 16.86%);
+  --gradient-botanical: linear-gradient(45deg, #284B36, #4F7D56, #82C49C, #DFF7E8, #FCFFFD);
+}
 
-  --color-safe-light-accent: hsla(36, 30.86%, 84.12%);
-  --color-light-accent: hsla(45, 30.77%, 94.9%);
-  --color-dark-accent: hsla(180, 22.84%, 61.37%);
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--color-black);
-  background: var(--color-white);
+  background-image: linear-gradient(45deg, #284B36, #4F7D56, #82C49C, #DFF7E8, #FCFFFD);
+  background-attachment: fixed;
+  background-size: cover;
+  color: #FCFFFD;
   font-family: "Montserrat", sans-serif;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/Fonts/Montserrat400/static/Montserrat-Regular.ttf")
-    format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  src: url("/Fonts/Montserrat500/static/Montserrat-Medium.ttf")
-    format("truetype");
-  font-weight: 500;
-  font-style: normal;
+  overflow-x: hidden;
 }
 
 @font-face {
@@ -45,6 +62,7 @@ body {
   src: url("/Fonts/CormorantInfant/cormorant-infant-regular.woff2") format("woff2");
   font-weight: 300 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -52,6 +70,55 @@ body {
   src: url("/Fonts/CormorantInfant/cormorant-infant-bold.woff2") format("woff2");
   font-weight: 600 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Infant";
+  src: url("/Fonts/CormorantInfant/cormorant-infant-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Fonts/Montserrat400/static/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Fonts/Montserrat400/static/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Fonts/Montserrat400/static/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Fonts/Montserrat400/static/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Fonts/Montserrat400/static/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -59,4 +126,51 @@ body {
   src: url("/Fonts/PrintedMoments/printedmoments-webfont.woff") format("woff");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+.gradient-botanical-bg,
+.gradient-coastal-bg {
+  background-image: linear-gradient(45deg, #284B36, #4F7D56, #82C49C, #DFF7E8, #FCFFFD);
+}
+
+.hero-underline-btn {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-underline-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: transform 0.3s ease;
+  transform-origin: right;
+  transform: scaleX(1);
+}
+
+.hero-underline-btn:hover::after {
+  transform: scaleX(0);
+}
+
+.nav-link-underline {
+  position: relative;
+}
+
+.nav-link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1.5px;
+  background-color: #82C49C;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-underline:hover::after {
+  width: 100%;
 }

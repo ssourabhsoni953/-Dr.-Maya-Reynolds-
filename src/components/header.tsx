@@ -1,148 +1,200 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
-// ==========================================
-// 1. TYPESCRIPT TYPE DEFINITIONS
-// ==========================================
-
-// Defines the structure for sub-items in dropdown menus (e.g., individual team members or specialties)
 type SubLink = {
-  name: string; // The text to display on the link
-  href: string; // The URL path to navigate to
+  name: string;
+  href: string;
 };
 
-// Defines the structure for a top-level navigation item
 type NavItem = {
-  name: string; // Name of the main menu link
-  href: string; // URL path of the main link
-  subLinks?: SubLink[]; // Optional list of child links (if present, renders a dropdown/accordion)
+  name: string;
+  href: string;
+  subLinks?: SubLink[];
 };
 
-// ==========================================
-// 2. NAVIGATION DATA CONFIGURATION
-// ==========================================
-// All navigation links and their dropdown children are defined in this single array.
-// Modifying this list automatically updates both Desktop and Mobile menus.
 const navItems: NavItem[] = [
   {
     name: "About",
-    href: "/therapists-newbury-park",
+    href: "#about",
   },
   {
-    name: "Our Team",
-    href: "/our-team",
+    name: "Clinical Focus",
+    href: "#services",
     subLinks: [
-      { name: "Jennifer Anderson, LMFT", href: "/jennifer-anderson" },
-      { name: "Candace Bletscher, AMFT", href: "/candace-bletscher" },
-      {
-        name: "Heather Williams-Baumgart, AMFT",
-        href: "/heather-williams-baumgart",
-      },
-      { name: "Samantha Johnson, AMFT", href: "/samantha-johnson" },
-      { name: "Autumn Bodily, AMFT", href: "/autumn-bodily" },
-      { name: "Rosa Gomez, AMFT", href: "/rosa-gomez" },
-      { name: "Chad Flores, AMFT", href: "/chad-flores" },
+      { name: "Anxiety & Panic", href: "#services-anxiety" },
+      { name: "Trauma & EMDR", href: "#services-emdr" },
+      { name: "Burnout & Perfectionism", href: "#services-burnout" },
+      { name: "Therapeutic Modalities", href: "#expertise" },
     ],
   },
   {
-    name: "Specialties",
-    href: "/specialties",
-    subLinks: [
-      {
-        name: "Dissociation",
-        href: "/dissociative-identity-disorder-therapist-newbury-park",
-      },
-      { name: "Trauma", href: "/trauma-counseling-newbury-park" },
-      {
-        name: "Special Needs Parenting",
-        href: "/counseling-special-needs-parents-newbury-park",
-      },
-      { name: "Couples", href: "/couples-therapy" },
-      { name: "Children & Teens", href: "/children-and-teens" },
-      { name: "Anxiety & Depression", href: "/anxiety-depression" },
-      { name: "Adoption", href: "/adoption-therapy-ventura-county-ca" },
-    ],
+    name: "Approach",
+    href: "#expertise",
   },
   {
-    name: "Methods",
-    href: "/methods",
-    subLinks: [
-      { name: "EMDR", href: "/emdr-therapy-newbury-park" },
-      { name: "Brainspotting", href: "/brainspotting" },
-      { name: "Somatic Therapy", href: "/somatic-therapy" },
-      { name: "Parts Work Therapy", href: "/parts-work-therapy" },
-    ],
+    name: "Office & Telehealth",
+    href: "#office",
   },
   {
     name: "FAQs",
-    href: "/faqs",
+    href: "#faqs",
   },
 ];
 
-// ==========================================
-// 3. HEADER COMPONENT
-// ==========================================
 const Header = () => {
-  // --- Component State ---
-  // Controls whether the mobile navigation slide-over / drawer is open or closed
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [headerHeight, setHeaderHeight] = useState(74);
+  const headerRef = useRef<HTMLElement>(null);
 
-  // Tracks which mobile submenu accordion (e.g. "Our Team") is currently expanded (or null if all closed)
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(
-    null,
-  );
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
 
-  // Helper function: Toggles accordion open/closed for a given menu item on mobile
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+    return () => window.removeEventListener("resize", updateHeaderHeight);
+  }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 20);
+
+      if (mobileMenuOpen) {
+        setVisible(true);
+        return;
+      }
+
+      if (currentScrollY > 80) {
+        if (currentScrollY > lastScrollY) {
+          setVisible(false);
+        } else if (currentScrollY < lastScrollY) {
+          setVisible(true);
+        }
+      } else {
+        setVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY, mobileMenuOpen]);
+
   const toggleMobileSubmenu = (name: string) => {
     setOpenMobileSubmenu((prev) => (prev === name ? null : name));
   };
 
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    // Main header wrapper with warm cream background matching the authentic site palette
-    <header className="relative w-full bg-[hsl(45,31%,95%)] text-[#2b2b2b] z-50">
-      <div className="max-w-[1905px] mx-auto px-6 md:px-[5vw] py-4 md:py-[1.4vw] flex items-center justify-between">
-        {/* ==================================================== */}
-        {/* BRAND LOGO                                           */}
-        {/* ==================================================== */}
-        <div className="shrink-0 flex items-center">
+    <header
+      ref={headerRef}
+      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+        !visible && !mobileMenuOpen ? "-translate-y-full" : "translate-y-0"
+      } ${
+        scrolled || mobileMenuOpen
+          ? "bg-[#284B36]/98 backdrop-blur-md shadow-md border-b border-[#82C49C]/30"
+          : "bg-[#284B36]/85 backdrop-blur-sm border-b border-[#82C49C]/20"
+      }`}
+    >
+      <div className="max-w-[1720px] mx-auto px-6 md:px-10 lg:px-14 py-4 md:py-5 flex items-center justify-between">
+        <div className="flex flex-col">
           <Link
             href="/"
-            className="inline-block transition-opacity hover:opacity-90"
+            onClick={handleLinkClick}
+            className="group flex flex-col transition-opacity hover:opacity-90"
           >
-            <Image
-              src="/images/logo.png"
-              alt="Conejo Valley Family Counseling"
-              width={256}
-              height={75}
-              priority
-              className="h-13.75 md:h-18.75 w-auto object-contain"
-            />
+            <span
+              className="text-[18px] md:text-[21px] lg:text-[23px] tracking-[0.18em] font-normal uppercase text-white transition-colors"
+              style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
+            >
+              Dr. Maya Reynolds, PsyD
+            </span>
+            <span
+              className="text-[9px] sm:text-[10px] md:text-[10.5px] tracking-[0.22em] font-medium uppercase text-[#82C49C] mt-0.5"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Licensed Clinical Psychologist · Santa Monica, CA
+            </span>
           </Link>
         </div>
 
-        {/* ==================================================== */}
-        {/* DESKTOP NAVIGATION BAR (visible on screens >= lg: 1024px) */}
-        {/* ==================================================== */}
-        <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 font-montserrat text-[13.5px] uppercase tracking-widest [-webkit-text-stroke:0.12px_currentColor]">
+        <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[12.5px] uppercase tracking-[0.16em] font-medium text-[#DFF7E8]">
           {navItems.map((item) => (
             <div key={item.name} className="relative group py-2">
-              {/* Check if this item has dropdown sublinks */}
               {item.subLinks ? (
-                <div className="cursor-pointer flex items-center gap-1 group-hover:text-black">
-                  {/* Main Link with animated underline effect on hover */}
-                  <Link href={item.href}>{item.name}</Link>
+                <div className="flex items-center gap-1.5 cursor-pointer">
+                  <Link
+                    href={item.href}
+                    className="hover:text-white transition-colors nav-link-underline"
+                    style={{ fontFamily: "'Montserrat', sans-serif" }}
+                  >
+                    {item.name}
+                  </Link>
+                  <svg
+                    className="w-3 h-3 text-[#82C49C] group-hover:text-white group-hover:rotate-180 transition-transform duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.75}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
 
-                  {/* Dropdown Menu (reveals on hover via 'group-hover:block') */}
-                  <div className="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
-                    <ul className="min-w-max text-right bg-[hsl(45,31%,95%)] p-0">
+                  <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
+                    <ul className="min-w-[250px] bg-[#1E3728] border border-[#82C49C]/40 shadow-2xl rounded-xl py-2 px-1">
                       {item.subLinks.map((sub) => (
                         <li key={sub.name}>
                           <Link
                             href={sub.href}
-                            className=" inline-block py-[0.75em] px-[1em] text-[13px] uppercase tracking-[0.08em] text-[#2b2b2b] hover:border-b text-right scale-x-[0.98] origin-right"
+                            className="block px-4 py-2.5 text-[11.5px] uppercase tracking-[0.14em] text-[#DFF7E8] hover:text-[#FCFFFD] hover:bg-[#4F7D56]/40 rounded-lg transition-colors"
+                            style={{ fontFamily: "'Montserrat', sans-serif" }}
                           >
                             {sub.name}
                           </Link>
@@ -150,49 +202,49 @@ const Header = () => {
                       ))}
                     </ul>
                   </div>
-                </div> 
+                </div>
               ) : (
-                /* Simple navigation link without dropdown */
-                <Link href={item.href}>{item.name}</Link>
+                <Link
+                  href={item.href}
+                  className="hover:text-white transition-colors nav-link-underline"
+                  style={{ fontFamily: "'Montserrat', sans-serif" }}
+                >
+                  {item.name}
+                </Link>
               )}
             </div>
           ))}
 
-          {/* Call to Action: Oval "Contact" Button */}
           <Link
-            href="/contact"
-            className="h-12 w-28 border border-[#2b2b2b] rounded-[50%] inline-flex items-center justify-center text-[13px] uppercase tracking-[0.12em] font-normal transition-colors duration-300 hover:bg-black hover:text-[hsl(45,31%,95%)] active:scale-95 ml-4"
+            href="#contact"
+            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12px] uppercase tracking-[0.16em] font-semibold transition-all duration-300 hover:bg-[#DFF7E8] hover:shadow-lg active:scale-95 ml-3 border border-[#82C49C]/40"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            <span className="scale-x-[0.98] inline-block">Contact</span>
+            Schedule a Consultation
           </Link>
         </nav>
 
-        {/* ==================================================== */}
-        {/* MOBILE HAMBURGER BUTTON (visible on screens < lg)    */}
-        {/* ==================================================== */}
-        <div className="flex lg:hidden items-center">
+        <div className="flex lg:hidden items-center ml-3">
           <button
+            type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            aria-label="Toggle navigation menu"
-            className="p-2 text-[#2b2b2b] hover:opacity-75 focus:outline-none"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            className="p-2.5 rounded-xl text-white hover:bg-white/10 active:scale-95 transition-all focus:outline-none flex items-center justify-center min-w-[44px] min-h-[44px]"
           >
-            {/* Animated 3-line hamburger that rotates into an 'X' when open */}
-            <div className="w-6 h-5 flex flex-col justify-between">
-              {/* Top line: rotates 45 deg down */}
+            <div className="w-6 h-5 relative flex flex-col justify-between">
               <span
-                className={`block h-0.5 w-full bg-[#2b2b2b] transition-transform duration-300 ${
+                className={`block h-0.5 w-6 bg-white rounded-full transition-all duration-300 origin-center ${
                   mobileMenuOpen ? "rotate-45 translate-y-2" : ""
                 }`}
               />
-              {/* Middle line: fades out */}
               <span
-                className={`block h-0.5 w-full bg-[#2b2b2b] transition-opacity duration-300 ${
-                  mobileMenuOpen ? "opacity-0" : ""
+                className={`block h-0.5 w-6 bg-white rounded-full transition-all duration-200 ${
+                  mobileMenuOpen ? "opacity-0 scale-0" : "opacity-100"
                 }`}
               />
-              {/* Bottom line: rotates -45 deg up */}
               <span
-                className={`block h-0.5 w-full bg-[#2b2b2b] transition-transform duration-300 ${
+                className={`block h-0.5 w-6 bg-white rounded-full transition-all duration-300 origin-center ${
                   mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
                 }`}
               />
@@ -201,48 +253,71 @@ const Header = () => {
         </div>
       </div>
 
-      {/* ==================================================== */}
-      {/* MOBILE DRAWER / OVERLAY MENU                         */}
-      {/* ==================================================== */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-21.25 bottom-0 bg-[hsl(45,31%,95%)] z-40 overflow-y-auto px-8 py-6 flex flex-col justify-between border-t border-[#2b2b2b]/10">
-          {/* Main List of Navigation Links */}
-          <div className="space-y-4">
+        <div
+          id="mobile-navigation-drawer"
+          style={{
+            height: `calc(100dvh - ${headerHeight}px)`,
+            maxHeight: `calc(100dvh - ${headerHeight}px)`,
+          }}
+          className="lg:hidden absolute top-full left-0 right-0 w-full bg-[#1A3323] z-50 overflow-y-auto overscroll-contain px-6 sm:px-8 py-6 flex flex-col justify-between border-t border-[#82C49C]/30 shadow-2xl transition-all duration-300"
+        >
+          <div className="space-y-3">
             {navItems.map((item) => (
-              <div
-                key={item.name}
-                className="border-b border-[#2b2b2b]/10 pb-3"
-              >
+              <div key={item.name} className="border-b border-[#82C49C]/20 pb-3">
                 {item.subLinks ? (
-                  // Expandable accordion item for links with submenus
                   <div>
-                    <div className="flex items-center justify-between">
-                      <Link
-                        href={item.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="text-[15px] font-montserrat uppercase tracking-widest"
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileSubmenu(item.name)}
+                      className="w-full flex items-center justify-between py-2 text-left group focus:outline-none"
+                    >
+                      <span
+                        className="text-[15px] uppercase tracking-[0.16em] font-medium text-white group-hover:text-[#82C49C] transition-colors"
+                        style={{ fontFamily: "'Montserrat', sans-serif" }}
                       >
                         {item.name}
-                      </Link>
-                      {/* Plus / Minus toggle button */}
-                      <button
-                        type="button"
-                        onClick={() => toggleMobileSubmenu(item.name)}
-                        className="p-2 text-[#2b2b2b] text-base"
+                      </span>
+                      <span
+                        className={`w-7 h-7 rounded-full border border-[#82C49C]/40 flex items-center justify-center text-[#DFF7E8] transition-transform duration-200 ${
+                          openMobileSubmenu === item.name
+                            ? "bg-[#82C49C] text-[#1E3728] rotate-180"
+                            : "group-hover:border-[#82C49C]"
+                        }`}
                       >
-                        {openMobileSubmenu === item.name ? "−" : "+"}
-                      </button>
-                    </div>
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </span>
+                    </button>
 
-                    {/* Collapsible accordion submenu content */}
                     {openMobileSubmenu === item.name && (
-                      <div className="pl-4 pt-2 pb-1 space-y-2">
+                      <div className="mt-2 pl-3 pr-1 py-2 bg-[#23422F]/70 rounded-xl space-y-1.5 border border-[#82C49C]/20">
+                        <Link
+                          href={item.href}
+                          onClick={handleLinkClick}
+                          className="block py-2.5 px-3 text-[12.5px] uppercase tracking-[0.14em] font-medium text-[#82C49C] hover:text-white rounded-lg transition-colors"
+                          style={{ fontFamily: "'Montserrat', sans-serif" }}
+                        >
+                          All {item.name} Overview &rarr;
+                        </Link>
                         {item.subLinks.map((sub) => (
                           <Link
                             key={sub.name}
                             href={sub.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-[13px] text-[#2b2b2b]/80 uppercase tracking-[0.08em] py-1"
+                            onClick={handleLinkClick}
+                            className="block py-2 px-3 text-[12.5px] uppercase tracking-[0.12em] font-light text-[#DFF7E8] hover:text-white hover:bg-[#4F7D56]/30 rounded-lg transition-colors"
+                            style={{ fontFamily: "'Montserrat', sans-serif" }}
                           >
                             {sub.name}
                           </Link>
@@ -251,11 +326,11 @@ const Header = () => {
                     )}
                   </div>
                 ) : (
-                  // Regular link without submenus
                   <Link
                     href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block text-[15px] font-montserrat uppercase tracking-widest"
+                    onClick={handleLinkClick}
+                    className="block py-2 text-[15px] uppercase tracking-[0.16em] font-medium text-white hover:text-[#82C49C] transition-colors"
+                    style={{ fontFamily: "'Montserrat', sans-serif" }}
                   >
                     {item.name}
                   </Link>
@@ -264,15 +339,33 @@ const Header = () => {
             ))}
           </div>
 
-          {/* Bottom Action inside Mobile Drawer */}
-          <div className="pt-6 pb-8">
+          <div className="pt-6 pb-4 space-y-4">
             <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center py-3 border border-[#2b2b2b] rounded-full text-[14px] uppercase tracking-[0.12em] hover:bg-[#2b2b2b] hover:text-[var(--color-white)] transition-colors"
+              href="#contact"
+              onClick={handleLinkClick}
+              className="w-full inline-flex items-center justify-center py-4 rounded-full bg-[#82C49C] text-[#1E3728] text-[13px] uppercase tracking-[0.16em] font-semibold transition-all hover:bg-[#DFF7E8] shadow-lg active:scale-98 border border-[#82C49C]/40"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Contact
+              Schedule a Consultation
             </Link>
+
+            <div className="pt-3 border-t border-[#82C49C]/20 text-center space-y-1">
+              <p className="text-[12px] text-[#DFF7E8]/80 font-light">
+                Santa Monica Office · Statewide CA Telehealth
+              </p>
+              <p className="text-[12px] font-medium text-white">
+                <a href="tel:3105550192" className="hover:text-[#82C49C] transition-colors">
+                  (310) 555-0192
+                </a>
+                <span className="mx-2 text-[#82C49C]">·</span>
+                <a
+                  href="mailto:appointments@drmayareynolds.com"
+                  className="hover:text-[#82C49C] transition-colors"
+                >
+                  appointments@drmayareynolds.com
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       )}
