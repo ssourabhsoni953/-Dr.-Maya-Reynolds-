@@ -5,11 +5,14 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section data-testid="hero-section" className="relative w-full overflow-hidden">
+    <section
+      data-testid="hero-section"
+      className="relative w-full overflow-hidden"
+    >
       <div className="pt-6 md:pt-10 lg:pt-14 pb-14 md:pb-20 lg:pb-24">
-        <div className="hidden sm:grid grid-cols-[minmax(0,1fr)_repeat(24,minmax(0,4rem))_minmax(0,1fr)] grid-rows-18 gap-3 sm:h-[860px] lg:h-[900px] xl:h-[920px] items-start">
-          <div className="relative 2xl:col-[1/8] 2xl:row-[2/18] lg:col-[1/8] lg:row-[2/16] sm:col-[1/7] sm:row-[1/14] sm:h-full">
-            <div className="relative w-full h-full overflow-hidden shadow-2xl rounded-3xl border border-[#82C49C]/40">
+        <div className="hidden items-start gap-3 sm:grid grid-cols-[minmax(0,1fr)_repeat(24,minmax(0,4rem))_minmax(0,1fr)] grid-rows-18 sm:h-215 lg:h-225 xl:h-230">
+          <div className="relative sm:h-full 2xl:col-[1/8] 2xl:row-[2/18] lg:col-[1/8] lg:row-[2/16] sm:col-[1/7] sm:row-[1/14]">
+            <div className="relative shadow-2xl border border-[#82C49C]/40 rounded-3xl w-full h-full overflow-hidden">
               <Image
                 src="/images/reynolds/dr-maya-reynolds.jpg"
                 alt="Dr. Maya Reynolds, PsyD - Licensed Clinical Psychologist in Santa Monica"
@@ -25,23 +28,27 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative 2xl:col-[9/18] 2xl:row-[2/18] lg:col-[9/18] lg:row-[2/16] sm:col-[8/17] h-full flex flex-col justify-start pt-2 lg:pt-4">
+          <div className="relative flex flex-col justify-start pt-2 lg:pt-4 h-full 2xl:col-[9/18] 2xl:row-[2/18] lg:col-[9/18] lg:row-[2/16] sm:col-[8/17]">
             <p
-              className="text-[11px] lg:text-[12px] tracking-[0.22em] text-[#DFF7E8] uppercase font-semibold leading-[1.6]"
+              className="font-semibold text-[#DFF7E8] text-[11px] lg:text-[12px] uppercase leading-[1.6] tracking-[0.22em]"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               DR. MAYA REYNOLDS, PsyD · LICENSED CLINICAL PSYCHOLOGIST
               <br className="hidden sm:inline" />
-              <span className="text-[#82C49C] font-normal"> · SANTA MONICA &amp; STATEWIDE CALIFORNIA TELEHEALTH</span>
+              <span className="font-normal text-[#82C49C]">
+                {" "}
+                · SANTA MONICA &amp; STATEWIDE CALIFORNIA TELEHEALTH
+              </span>
             </p>
 
             <h1
-              className="mt-8 lg:mt-12 xl:mt-14 text-[2.6rem] md:text-[3rem] lg:text-[3.4rem] xl:text-[3.9rem] leading-[1.12] text-white tracking-[-0.015em] font-light drop-shadow-sm"
+              className="drop-shadow-sm mt-8 lg:mt-12 xl:mt-14 font-light text-[2.6rem] text-white md:text-[3rem] lg:text-[3.4rem] xl:text-[3.9rem] leading-[1.12] tracking-[-0.015em]"
               style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
             >
-              Feeling &ldquo;functional&rdquo; on the outside, while quietly struggling{" "}
+              Feeling &ldquo;functional&rdquo; on the outside, while quietly
+              struggling{" "}
               <span
-                className="inline-block text-[#DFF7E8] text-[1.28em] font-normal lowercase not-italic align-baseline leading-[0.7] transform translate-y-1 drop-shadow-md"
+                className="inline-block drop-shadow-md font-normal text-[#DFF7E8] text-[1.28em] not-italic lowercase align-baseline leading-[0.7] translate-y-1 transform"
                 style={{
                   fontFamily: "'PrintedMoments', cursive",
                 }}
@@ -52,26 +59,27 @@ export default function Hero() {
             </h1>
 
             <p
-              className="mt-6 md:mt-8 text-[15px] lg:text-[16px] leading-[1.85] text-[#DFF7E8] font-light max-w-[520px]"
+              className="mt-6 md:mt-8 max-w-130 font-light text-[#DFF7E8] text-[15px] lg:text-[16px] leading-[1.85]"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
-              Therapy in Santa Monica and statewide California for thoughtful, high-achieving
-              adults overwhelmed by anxiety, stress, or the lingering effects of past experiences.
-              A space combining practical tools with depth-oriented work to slow down, reconnect,
-              and feel regulated in daily life.
+              Therapy in Santa Monica and statewide California for thoughtful,
+              high-achieving adults overwhelmed by anxiety, stress, or the
+              lingering effects of past experiences. A space combining practical
+              tools with depth-oriented work to slow down, reconnect, and feel
+              regulated in daily life.
             </p>
 
-            <div className="mt-8 md:mt-10 lg:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-7">
+            <div className="flex sm:flex-row flex-col items-start sm:items-center gap-5 sm:gap-7 mt-8 md:mt-10 lg:mt-12">
               <Link
                 href="#contact"
-                className="inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12px] lg:text-[13px] tracking-[0.16em] uppercase font-semibold transition-all duration-300 hover:bg-[#DFF7E8] hover:shadow-xl active:scale-95 border border-[#82C49C]/50"
+                className="inline-flex justify-center items-center bg-[#82C49C] hover:bg-[#DFF7E8] hover:shadow-xl px-7 py-3.5 border border-[#82C49C]/50 rounded-full font-semibold text-[#1E3728] text-[12px] lg:text-[13px] uppercase tracking-[0.16em] active:scale-95 transition-all duration-300"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 Schedule an Initial Consultation
               </Link>
               <Link
                 href="#services"
-                className="hero-underline-btn text-[12px] lg:text-[13px] tracking-[0.14em] uppercase text-[#DFF7E8] font-normal pb-1 hover:text-white transition-colors"
+                className="pb-1 font-normal text-[#DFF7E8] text-[12px] lg:text-[13px] hover:text-white hero-underline-btn uppercase tracking-[0.14em] transition-colors"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 Explore Areas of Focus &rarr;
@@ -79,8 +87,8 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="relative 2xl:col-[19/27] 2xl:row-[6/17] lg:col-[19/27] lg:row-[5/15] sm:col-[18/27] sm:row-[4/14] h-full">
-            <div className="relative w-full h-full overflow-hidden shadow-2xl rounded-3xl border border-[#82C49C]/40">
+          <div className="relative h-full 2xl:col-[19/27] 2xl:row-[6/17] lg:col-[19/27] lg:row-[5/15] sm:col-[18/27] sm:row-[4/14]">
+            <div className="relative shadow-2xl border border-[#82C49C]/40 rounded-3xl w-full h-full overflow-hidden">
               <Image
                 src="/images/reynolds/hero-ocean-mist.jpg"
                 alt="Calming Santa Monica Pacific ocean morning mist at dawn"
@@ -97,24 +105,25 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="sm:hidden px-6 pt-2 flex flex-col space-y-6">
+        <div className="sm:hidden flex flex-col space-y-6 px-6 pt-2">
           <p
-            className="text-[11px] tracking-[0.2em] text-[#DFF7E8] uppercase font-semibold leading-[1.6]"
+            className="font-semibold text-[#DFF7E8] text-[11px] uppercase leading-[1.6] tracking-[0.2em]"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             DR. MAYA REYNOLDS, PsyD
-            <span className="block text-[#82C49C] text-[10px] tracking-[0.16em] mt-0.5">
+            <span className="block mt-0.5 text-[#82C49C] text-[10px] tracking-[0.16em]">
               SANTA MONICA &amp; CALIFORNIA TELEHEALTH
             </span>
           </p>
 
           <h1
-            className="text-[2.35rem] leading-[1.14] text-white tracking-tight font-light"
+            className="font-light text-[2.35rem] text-white leading-[1.14] tracking-tight"
             style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
           >
-            Feeling &ldquo;functional&rdquo; on the outside, while quietly struggling{" "}
+            Feeling &ldquo;functional&rdquo; on the outside, while quietly
+            struggling{" "}
             <span
-              className="inline-block text-[#DFF7E8] text-[1.25em] font-normal lowercase not-italic align-baseline leading-[0.7]"
+              className="inline-block font-normal text-[#DFF7E8] text-[1.25em] not-italic lowercase align-baseline leading-[0.7]"
               style={{ fontFamily: "'PrintedMoments', cursive" }}
             >
               within
@@ -122,7 +131,7 @@ export default function Hero() {
             .
           </h1>
 
-          <div className="relative w-full h-[360px] overflow-hidden rounded-2xl my-2 border border-[#82C49C]/40">
+          <div className="relative my-2 border border-[#82C49C]/40 rounded-2xl w-full h-90 overflow-hidden">
             <Image
               src="/images/reynolds/dr-maya-reynolds.jpg"
               alt="Dr. Maya Reynolds, PsyD"
@@ -133,33 +142,34 @@ export default function Hero() {
           </div>
 
           <p
-            className="text-[14.5px] leading-[1.8] text-[#DFF7E8] font-light"
+            className="font-light text-[#DFF7E8] text-[14.5px] leading-[1.8]"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            Therapy in Santa Monica and statewide California for thoughtful, high-achieving
-            adults overwhelmed by anxiety, stress, or the lingering effects of past experiences.
-            A space combining practical tools with depth-oriented work to slow down, reconnect,
-            and feel regulated in daily life.
+            Therapy in Santa Monica and statewide California for thoughtful,
+            high-achieving adults overwhelmed by anxiety, stress, or the
+            lingering effects of past experiences. A space combining practical
+            tools with depth-oriented work to slow down, reconnect, and feel
+            regulated in daily life.
           </p>
 
           <div className="flex flex-col gap-4 pt-2">
             <Link
               href="#contact"
-              className="w-full inline-flex items-center justify-center py-3.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12.5px] tracking-[0.16em] uppercase font-semibold border border-[#82C49C]/50 hover:bg-[#DFF7E8] transition-colors"
+              className="inline-flex justify-center items-center bg-[#82C49C] hover:bg-[#DFF7E8] py-3.5 border border-[#82C49C]/50 rounded-full w-full font-semibold text-[#1E3728] text-[12.5px] uppercase tracking-[0.16em] transition-colors"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Schedule an Initial Consultation
             </Link>
             <Link
               href="#services"
-              className="inline-flex items-center justify-center text-[12px] tracking-[0.14em] uppercase text-[#DFF7E8] py-2"
+              className="inline-flex justify-center items-center py-2 text-[#DFF7E8] text-[12px] uppercase tracking-[0.14em]"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Explore Areas of Focus &rarr;
             </Link>
           </div>
 
-          <div className="relative w-full h-[220px] overflow-hidden rounded-2xl mt-4 border border-[#82C49C]/40">
+          <div className="relative mt-4 border border-[#82C49C]/40 rounded-2xl w-full h-55 overflow-hidden">
             <Image
               src="/images/reynolds/hero-ocean-mist.jpg"
               alt="Calming Santa Monica Pacific ocean morning mist"

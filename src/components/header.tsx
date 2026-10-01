@@ -1,4 +1,4 @@
-"use client";
+`use client`;
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -45,7 +45,9 @@ const navItems: NavItem[] = [
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(
+    null,
+  );
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -139,21 +141,21 @@ const Header = () => {
           : "bg-[#284B36]/85 backdrop-blur-sm border-b border-[#82C49C]/20"
       }`}
     >
-      <div className="max-w-[1720px] mx-auto px-6 md:px-10 lg:px-14 py-4 md:py-5 flex items-center justify-between">
+      <div className="flex justify-between items-center mx-auto px-6 md:px-10 lg:px-14 py-4 md:py-5 max-w-[1720px]">
         <div className="flex flex-col">
           <Link
             href="/"
             onClick={handleLinkClick}
-            className="group flex flex-col transition-opacity hover:opacity-90"
+            className="group flex flex-col hover:opacity-90 transition-opacity"
           >
             <span
-              className="text-[18px] md:text-[21px] lg:text-[23px] tracking-[0.18em] font-normal uppercase text-white transition-colors"
+              className="font-normal text-[18px] text-white md:text-[21px] lg:text-[23px] uppercase tracking-[0.18em] transition-colors"
               style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
             >
               Dr. Maya Reynolds, PsyD
             </span>
             <span
-              className="text-[9px] sm:text-[10px] md:text-[10.5px] tracking-[0.22em] font-medium uppercase text-[#82C49C] mt-0.5"
+              className="mt-0.5 font-medium text-[#82C49C] text-[9px] sm:text-[10px] md:text-[10.5px] uppercase tracking-[0.22em]"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Licensed Clinical Psychologist · Santa Monica, CA
@@ -161,14 +163,14 @@ const Header = () => {
           </Link>
         </div>
 
-        <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 text-[12.5px] uppercase tracking-[0.16em] font-medium text-[#DFF7E8]">
+        <nav className="hidden lg:flex items-center space-x-7 xl:space-x-9 font-medium text-[#DFF7E8] text-[12.5px] uppercase tracking-[0.16em]">
           {navItems.map((item) => (
-            <div key={item.name} className="relative group py-2">
+            <div key={item.name} className="group relative py-2">
               {item.subLinks ? (
                 <div className="flex items-center gap-1.5 cursor-pointer">
                   <Link
                     href={item.href}
-                    className="hover:text-white transition-colors nav-link-underline"
+                    className="hover:text-white nav-link-underline transition-colors"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
                   >
                     {item.name}
@@ -187,13 +189,13 @@ const Header = () => {
                     />
                   </svg>
 
-                  <div className="absolute left-0 top-full pt-2 hidden group-hover:block z-50">
-                    <ul className="min-w-[250px] bg-[#1E3728] border border-[#82C49C]/40 shadow-2xl rounded-xl py-2 px-1">
+                  <div className="hidden group-hover:block top-full left-0 z-50 absolute pt-2">
+                    <ul className="bg-[#1E3728] shadow-2xl px-1 py-2 border border-[#82C49C]/40 rounded-xl min-w-62.5">
                       {item.subLinks.map((sub) => (
                         <li key={sub.name}>
                           <Link
                             href={sub.href}
-                            className="block px-4 py-2.5 text-[11.5px] uppercase tracking-[0.14em] text-[#DFF7E8] hover:text-[#FCFFFD] hover:bg-[#4F7D56]/40 rounded-lg transition-colors"
+                            className="block hover:bg-[#4F7D56]/40 px-4 py-2.5 rounded-lg text-[#DFF7E8] text-[11.5px] hover:text-[#FCFFFD] uppercase tracking-[0.14em] transition-colors"
                             style={{ fontFamily: "'Montserrat', sans-serif" }}
                           >
                             {sub.name}
@@ -206,7 +208,7 @@ const Header = () => {
               ) : (
                 <Link
                   href={item.href}
-                  className="hover:text-white transition-colors nav-link-underline"
+                  className="hover:text-white nav-link-underline transition-colors"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 >
                   {item.name}
@@ -217,22 +219,24 @@ const Header = () => {
 
           <Link
             href="#contact"
-            className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#82C49C] text-[#1E3728] text-[12px] uppercase tracking-[0.16em] font-semibold transition-all duration-300 hover:bg-[#DFF7E8] hover:shadow-lg active:scale-95 ml-3 border border-[#82C49C]/40"
+            className="inline-flex justify-center items-center bg-[#82C49C] hover:bg-[#DFF7E8] hover:shadow-lg ml-3 px-6 py-2.5 border border-[#82C49C]/40 rounded-full font-semibold text-[#1E3728] text-[12px] uppercase tracking-[0.16em] active:scale-95 transition-all duration-300"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             Schedule a Consultation
           </Link>
         </nav>
 
-        <div className="flex lg:hidden items-center ml-3">
+        <div className="lg:hidden flex items-center ml-3">
           <button
             type="button"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
-            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
             aria-expanded={mobileMenuOpen}
-            className="p-2.5 rounded-xl text-white hover:bg-white/10 active:scale-95 transition-all focus:outline-none flex items-center justify-center min-w-[44px] min-h-[44px]"
+            className="flex justify-center items-center hover:bg-white/10 p-2.5 rounded-xl focus:outline-none min-w-11 min-h-11 text-white active:scale-95 transition-all"
           >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
+            <div className="relative flex flex-col justify-between w-6 h-5">
               <span
                 className={`block h-0.5 w-6 bg-white rounded-full transition-all duration-300 origin-center ${
                   mobileMenuOpen ? "rotate-45 translate-y-2" : ""
@@ -260,20 +264,23 @@ const Header = () => {
             height: `calc(100dvh - ${headerHeight}px)`,
             maxHeight: `calc(100dvh - ${headerHeight}px)`,
           }}
-          className="lg:hidden absolute top-full left-0 right-0 w-full bg-[#1A3323] z-50 overflow-y-auto overscroll-contain px-6 sm:px-8 py-6 flex flex-col justify-between border-t border-[#82C49C]/30 shadow-2xl transition-all duration-300"
+          className="lg:hidden top-full right-0 left-0 z-50 absolute flex flex-col justify-between bg-[#1A3323] shadow-2xl px-6 sm:px-8 py-6 border-[#82C49C]/30 border-t w-full overflow-y-auto overscroll-contain transition-all duration-300"
         >
           <div className="space-y-3">
             {navItems.map((item) => (
-              <div key={item.name} className="border-b border-[#82C49C]/20 pb-3">
+              <div
+                key={item.name}
+                className="pb-3 border-[#82C49C]/20 border-b"
+              >
                 {item.subLinks ? (
                   <div>
                     <button
                       type="button"
                       onClick={() => toggleMobileSubmenu(item.name)}
-                      className="w-full flex items-center justify-between py-2 text-left group focus:outline-none"
+                      className="group flex justify-between items-center py-2 focus:outline-none w-full text-left"
                     >
                       <span
-                        className="text-[15px] uppercase tracking-[0.16em] font-medium text-white group-hover:text-[#82C49C] transition-colors"
+                        className="font-medium text-[15px] text-white group-hover:text-[#82C49C] uppercase tracking-[0.16em] transition-colors"
                         style={{ fontFamily: "'Montserrat', sans-serif" }}
                       >
                         {item.name}
@@ -302,11 +309,11 @@ const Header = () => {
                     </button>
 
                     {openMobileSubmenu === item.name && (
-                      <div className="mt-2 pl-3 pr-1 py-2 bg-[#23422F]/70 rounded-xl space-y-1.5 border border-[#82C49C]/20">
+                      <div className="space-y-1.5 bg-[#23422F]/70 mt-2 py-2 pr-1 pl-3 border border-[#82C49C]/20 rounded-xl">
                         <Link
                           href={item.href}
                           onClick={handleLinkClick}
-                          className="block py-2.5 px-3 text-[12.5px] uppercase tracking-[0.14em] font-medium text-[#82C49C] hover:text-white rounded-lg transition-colors"
+                          className="block px-3 py-2.5 rounded-lg font-medium text-[#82C49C] text-[12.5px] hover:text-white uppercase tracking-[0.14em] transition-colors"
                           style={{ fontFamily: "'Montserrat', sans-serif" }}
                         >
                           All {item.name} Overview &rarr;
@@ -316,7 +323,7 @@ const Header = () => {
                             key={sub.name}
                             href={sub.href}
                             onClick={handleLinkClick}
-                            className="block py-2 px-3 text-[12.5px] uppercase tracking-[0.12em] font-light text-[#DFF7E8] hover:text-white hover:bg-[#4F7D56]/30 rounded-lg transition-colors"
+                            className="block hover:bg-[#4F7D56]/30 px-3 py-2 rounded-lg font-light text-[#DFF7E8] text-[12.5px] hover:text-white uppercase tracking-[0.12em] transition-colors"
                             style={{ fontFamily: "'Montserrat', sans-serif" }}
                           >
                             {sub.name}
@@ -329,7 +336,7 @@ const Header = () => {
                   <Link
                     href={item.href}
                     onClick={handleLinkClick}
-                    className="block py-2 text-[15px] uppercase tracking-[0.16em] font-medium text-white hover:text-[#82C49C] transition-colors"
+                    className="block py-2 font-medium text-[15px] text-white hover:text-[#82C49C] uppercase tracking-[0.16em] transition-colors"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
                   >
                     {item.name}
@@ -339,22 +346,25 @@ const Header = () => {
             ))}
           </div>
 
-          <div className="pt-6 pb-4 space-y-4">
+          <div className="space-y-4 pt-6 pb-4">
             <Link
               href="#contact"
               onClick={handleLinkClick}
-              className="w-full inline-flex items-center justify-center py-4 rounded-full bg-[#82C49C] text-[#1E3728] text-[13px] uppercase tracking-[0.16em] font-semibold transition-all hover:bg-[#DFF7E8] shadow-lg active:scale-98 border border-[#82C49C]/40"
+              className="inline-flex justify-center items-center bg-[#82C49C] hover:bg-[#DFF7E8] shadow-lg py-4 border border-[#82C49C]/40 rounded-full w-full font-semibold text-[#1E3728] text-[13px] uppercase tracking-[0.16em] active:scale-98 transition-all"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Schedule a Consultation
             </Link>
 
-            <div className="pt-3 border-t border-[#82C49C]/20 text-center space-y-1">
-              <p className="text-[12px] text-[#DFF7E8]/80 font-light">
+            <div className="space-y-1 pt-3 border-[#82C49C]/20 border-t text-center">
+              <p className="font-light text-[#DFF7E8]/80 text-[12px]">
                 Santa Monica Office · Statewide CA Telehealth
               </p>
-              <p className="text-[12px] font-medium text-white">
-                <a href="tel:3105550192" className="hover:text-[#82C49C] transition-colors">
+              <p className="font-medium text-[12px] text-white">
+                <a
+                  href="tel:3105550192"
+                  className="hover:text-[#82C49C] transition-colors"
+                >
                   (310) 555-0192
                 </a>
                 <span className="mx-2 text-[#82C49C]">·</span>

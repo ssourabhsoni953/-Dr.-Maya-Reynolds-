@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function YouDeserveSection() {
   return (
-    <section className="w-full px-4 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-12">
-      <div className="relative flex justify-center items-center w-full max-w-[1580px] mx-auto min-h-[460px] md:min-h-[540px] lg:min-h-[580px] overflow-hidden rounded-3xl border border-[#82C49C]/40 shadow-2xl">
+    <section className="px-4 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-12 w-full">
+      <div className="relative flex justify-center items-center shadow-2xl mx-auto border border-[#82C49C]/40 rounded-3xl w-full max-w-[1580px] min-h-115 md:min-h-135 lg:min-h-145 overflow-hidden">
         <div className="z-0 absolute inset-0">
           <Image
             src="/images/reynolds/quote-ocean-tideline.jpg"
@@ -21,26 +21,26 @@ export default function YouDeserveSection() {
           />
         </div>
 
-        <div className="z-10 relative flex flex-col justify-center items-center mx-auto px-6 sm:px-10 max-w-4xl text-center py-16 sm:py-24">
+        <div className="z-10 relative flex flex-col justify-center items-center mx-auto px-6 sm:px-10 py-16 sm:py-24 max-w-4xl text-center">
           <span
-            className="text-[#DFF7E8]/60 text-5xl sm:text-6xl md:text-7xl font-light leading-none mb-3 select-none"
+            className="mb-3 font-light text-[#DFF7E8]/60 text-5xl sm:text-6xl md:text-7xl leading-none select-none"
             style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
           >
             &ldquo;
           </span>
 
           <blockquote
-            className="font-light text-[1.85rem] sm:text-[2.3rem] md:text-[2.7rem] lg:text-[3rem] leading-[1.28] text-white tracking-tight mb-8 drop-shadow-md"
+            className="drop-shadow-md mb-8 font-light text-[1.85rem] text-white sm:text-[2.3rem] md:text-[2.7rem] lg:text-[3rem] leading-[1.28] tracking-tight"
             style={{ fontFamily: "'Cormorant Infant', Georgia, serif" }}
           >
-            Therapy works best when clients feel respected, understood, and actively
-            involved in the process. My goal is not just symptom relief, but helping
-            clients develop insight, resilience, and a stronger relationship with
-            themselves over time.
+            Therapy works best when clients feel respected, understood, and
+            actively involved in the process. My goal is not just symptom
+            relief, but helping clients develop insight, resilience, and a
+            stronger relationship with themselves over time.
           </blockquote>
 
           <cite
-            className="not-italic text-[12px] sm:text-[13px] tracking-[0.24em] uppercase text-[#DFF7E8] font-medium"
+            className="font-medium text-[#DFF7E8] text-[12px] sm:text-[13px] not-italic uppercase tracking-[0.24em]"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             — Dr. Maya Reynolds, PsyD · Licensed Clinical Psychologist
